@@ -1,0 +1,12 @@
+{
+  "name": "bucket-list",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test",
+    "dev": "npx -y netlify-cli@26 dev"
+  },
+  "dependencies": {
+    "@supabase/postgrest-js": "^2.109.0"
+  }
+}

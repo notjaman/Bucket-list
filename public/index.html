@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>Bucket Lists</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <main>
+    <p id="message" role="alert" hidden></p>
+
+    <section id="home" hidden>
+      <h1>Bucket Lists</h1>
+      <p class="lead">Start a shared bucket list with your friends, or join one with its code.</p>
+      <div class="home-grid">
+        <form id="create-form" class="panel">
+          <h2>Create a bucket list</h2>
+          <label>List name
+            <input name="title" required maxlength="60" placeholder="e.g. Uni friends" autocomplete="off">
+          </label>
+          <button type="submit">Create</button>
+        </form>
+        <form id="join-form" class="panel">
+          <h2>Join a bucket list</h2>
+          <label>Code or link
+            <input name="code" required placeholder="e.g. k7m2p9qx" autocomplete="off" autocapitalize="none" spellcheck="false">
+          </label>
+          <button type="submit">Join</button>
+        </form>
+      </div>
+      <section id="my-lists-section" aria-labelledby="my-lists-title" hidden>
+        <h2 id="my-lists-title">Your lists on this device</h2>
+        <ul id="my-lists"></ul>
+      </section>
+    </section>
+
+    <div id="board" hidden>
+      <header class="board-head">
+        <a href="#" class="back">← All lists</a>
+        <h1 id="list-title"></h1>
+        <p class="share">
+          Code <code id="list-code"></code>
+          <button type="button" id="copy-btn" class="secondary">Copy link</button>
+        </p>
+      </header>
+
+      <section class="panel" aria-labelledby="form-title">
+        <h2 id="form-title">Add an item</h2>
+        <form id="item-form">
+          <label>Name
+            <input name="name" list="names" required maxlength="50" autocomplete="off">
+          </label>
+          <datalist id="names"></datalist>
+          <label>Bucket list item
+            <input name="item" required maxlength="200">
+          </label>
+          <label>Expected done by
+            <input name="target_date" type="date">
+          </label>
+          <label>Status
+            <select name="status" data-options="status"></select>
+          </label>
+          <label>Category
+            <select name="category" data-options="category" data-blank="—"></select>
+          </label>
+          <label class="wide">Notes
+            <textarea name="notes" maxlength="1000" rows="3"></textarea>
+          </label>
+          <div class="wide actions">
+            <button type="submit" id="submit-btn">Add</button>
+            <button type="button" id="cancel-btn" class="secondary" hidden>Cancel</button>
+          </div>
+        </form>
+      </section>
+
+      <section aria-labelledby="summary-title">
+        <h2 id="summary-title">Progress</h2>
+        <ul id="summary"></ul>
+      </section>
+
+      <section aria-labelledby="items-title">
+        <h2 id="items-title">Items</h2>
+        <div class="filters">
+          <label>Person
+            <select id="f-name"><option value="">Everyone</option></select>
+          </label>
+          <label>Status
+            <select id="f-status" data-options="status" data-blank="All"></select>
+          </label>
+          <label>Category
+            <select id="f-category" data-options="category" data-blank="All"></select>
+          </label>
+          <label>Sort
+            <select id="sort">
+              <option value="newest">Newest first</option>
+              <option value="target">Target date</option>
+            </select>
+          </label>
+        </div>
+        <ul id="list" aria-live="polite"><li class="empty">Loading…</li></ul>
+      </section>
+    </div>
+  </main>
+
+  <template id="row-tpl">
+    <li class="row">
+      <div class="what">
+        <span class="item"></span>
+        <span class="meta">
+          <span class="who"></span>
+          <span class="tag category" hidden></span>
+          <span class="created"></span>
+        </span>
+        <details class="notes" hidden><summary>Notes</summary><p></p></details>
+      </div>
+      <div class="when">
+        <span class="label">Target</span>
+        <span class="target"></span>
+        <span class="due" hidden></span>
+      </div>
+      <div class="controls">
+        <select class="status" data-options="status"></select>
+        <button type="button" class="edit ghost">Edit</button>
+        <button type="button" class="delete ghost danger">Delete</button>
+      </div>
+    </li>
+  </template>
+</body>
+</html>
